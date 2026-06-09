@@ -1,0 +1,41 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: v.$font-heading;
+  font-weight: v.$font-weight-medium;
+  line-height: 1.15;
+  color: v.$color-text;
+}
+
+h1 { font-size: v.$font-size-4xl; }
+h2 { font-size: v.$font-size-3xl; }
+h3 { font-size: v.$font-size-2xl; }
+h4 { font-size: v.$font-size-xl; }
+
+@include m.respond-to(md) {
+  h1 { font-size: v.$font-size-5xl; }
+  h2 { font-size: v.$font-size-4xl; }
+}
+
+p {
+  font-size: v.$font-size-base;
+  line-height: 1.7;
+  color: v.$color-text;
+}
+
+a {
+  color: v.$color-bronze;
+  text-decoration: none;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-bronze-light;
+  }
+}
+
+.label {
+  font-family: v.$font-body;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: v.$color-text-muted;
+}

@@ -1,0 +1,28 @@
+.page_header {
+  max-width: v.$container-max-width-sm;
+  margin-bottom: v.$space-8;
+}
+
+.page_title {
+  margin-top: v.$space-2;
+  margin-bottom: v.$space-3;
+}
+
+.page_intro {
+  color: v.$color-text-muted;
+  font-size: v.$font-size-lg;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-4;
+
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

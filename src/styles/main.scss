@@ -1,0 +1,132 @@
+// Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  padding-top: v.$header-height;
+}
+
+body {
+  font-family: v.$font-body;
+  font-size: v.$font-size-base;
+  background-color: v.$color-bg;
+  color: v.$color-text;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: v.$font-heading;
+  font-weight: v.$font-weight-medium;
+  line-height: 1.15;
+  color: v.$color-text;
+}
+
+h1 { font-size: v.$font-size-4xl; }
+h2 { font-size: v.$font-size-3xl; }
+h3 { font-size: v.$font-size-2xl; }
+h4 { font-size: v.$font-size-xl; }
+
+@include m.respond-to(md) {
+  h1 { font-size: v.$font-size-5xl; }
+  h2 { font-size: v.$font-size-4xl; }
+}
+
+p {
+  font-size: v.$font-size-base;
+  line-height: 1.7;
+  color: v.$color-text;
+}
+
+a {
+  color: v.$color-bronze;
+  text-decoration: none;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-bronze-light;
+  }
+}
+
+.label {
+  font-family: v.$font-body;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: v.$color-burgundy;
+}
+
+// Layout primitives
+.block {
+  padding-block: v.$space-12;
+
+  @include m.respond-to(lg) {
+    padding-block: v.$space-16;
+  }
+}
+
+.block--alt {
+  background-color: v.$color-bg-alt;
+}
+
+.block--surface {
+  background-color: v.$color-surface;
+}
+
+.block--dark {
+  background-color: v.$color-bg-dark;
+  color: v.$color-text-light;
+
+  h1, h2, h3, h4, h5, h6 { color: v.$color-text-light; }
+  p { color: rgba(237, 232, 224, 0.72); }
+  .label { color: v.$color-burgundy-light; }
+}
+
+.container {
+  width: 100%;
+  max-width: v.$container-max-width;
+  margin-inline: auto;
+  padding-inline: v.$space-3;
+
+  @include m.respond-to(md) {
+    padding-inline: v.$space-4;
+  }
+}
+
+.container-lg {
+  max-width: v.$container-max-width-lg;
+}
+
+.container-sm {
+  max-width: v.$container-max-width-sm;
+}
+
+.container-xs {
+  max-width: v.$container-max-width-xs;
+}

@@ -1,0 +1,46 @@
+@use 'variables' as v;
+
+@mixin respond-to($bp) {
+  @if $bp == sm {
+    @media (min-width: v.$bp-sm) { @content; }
+  } @else if $bp == md {
+    @media (min-width: v.$bp-md) { @content; }
+  } @else if $bp == lg {
+    @media (min-width: v.$bp-lg) { @content; }
+  } @else if $bp == xl {
+    @media (min-width: v.$bp-xl) { @content; }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin bronze-underline($color: v.$color-bronze) {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: $color;
+  margin-top: v.$space-2;
+}

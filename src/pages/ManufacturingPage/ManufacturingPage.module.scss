@@ -1,0 +1,47 @@
+.page_title {
+  margin-top: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.intro {
+  color: v.$color-text-muted;
+  font-size: v.$font-size-lg;
+  max-width: 60ch;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-8;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: v.$space-4;
+  align-items: start;
+}
+
+.step__number {
+  font-family: v.$font-heading;
+  font-size: v.$font-size-2xl;
+  font-weight: v.$font-weight-medium;
+  color: v.$color-bronze;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.step__content {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.step__title {
+  font-size: v.$font-size-xl;
+}
+
+.step__description {
+  color: v.$color-text-muted;
+  max-width: 55ch;
+}
