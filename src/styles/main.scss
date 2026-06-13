@@ -1,132 +1,240 @@
-// Reset
-*, *::before, *::after {
+// ─── Reset ───────────────────────────────────────────────────────────────────
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+// ─── Base ────────────────────────────────────────────────────────────────────
 html {
   scroll-behavior: smooth;
 }
 
-main {
-  padding-top: v.$header-height;
-}
-
 body {
+  background-color: v.$color-sand;
+  color: v.$color-ink;
   font-family: v.$font-body;
-  font-size: v.$font-size-base;
-  background-color: v.$color-bg;
-  color: v.$color-text;
-  line-height: 1.6;
+  font-size: v.$font-size-md;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-img, video {
-  display: block;
-  max-width: 100%;
+::selection {
+  background-color: v.$color-bronze;
+  color: v.$color-coal;
 }
 
-ul, ol {
-  list-style: none;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
-}
-
-// Typography
+// ─── Typography ──────────────────────────────────────────────────────────────
 h1, h2, h3, h4, h5, h6 {
-  font-family: v.$font-heading;
-  font-weight: v.$font-weight-medium;
-  line-height: 1.15;
-  color: v.$color-text;
+  font-family: v.$font-display;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
-h1 { font-size: v.$font-size-4xl; }
-h2 { font-size: v.$font-size-3xl; }
-h3 { font-size: v.$font-size-2xl; }
-h4 { font-size: v.$font-size-xl; }
+h1 { font-size: v.$font-size-display; }
+h2 { font-size: v.$font-size-display-2; }
+h3 { font-size: v.$font-size-display-3; }
 
-@include m.respond-to(md) {
-  h1 { font-size: v.$font-size-5xl; }
-  h2 { font-size: v.$font-size-4xl; }
-}
+p { max-width: 70ch; }
 
-p {
-  font-size: v.$font-size-base;
-  line-height: 1.7;
-  color: v.$color-text;
-}
-
+// ─── Links ───────────────────────────────────────────────────────────────────
 a {
   color: v.$color-bronze;
-  text-decoration: none;
-  transition: color v.$transition-fast;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color v.$transition-base;
 
   &:hover {
     color: v.$color-bronze-light;
   }
 }
 
-.label {
-  font-family: v.$font-body;
-  font-size: v.$font-size-xs;
-  font-weight: v.$font-weight-semibold;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: v.$color-burgundy;
+// ─── Motif classes ───────────────────────────────────────────────────────────
+.molten {
+  background: v.$gradient-molten;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-// Layout primitives
+.ghost-numeral {
+  font-family: v.$font-display;
+  font-size: clamp(10rem, 22vw, 24rem);
+  font-weight: 500;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(176, 122, 46, 0.35);
+  pointer-events: none;
+  user-select: none;
+}
+
+.label {
+  @include m.eyebrow(v.$color-verdigris);
+
+  .block--dark & {
+    color: v.$color-verdigris-light;
+  }
+}
+
+.batch-stamp {
+  display: inline-block;
+  // prevent cross-axis stretch when placed in a column flex container
+  width: fit-content;
+  font-family: v.$font-body;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid currentColor;
+  padding: 4px 10px;
+}
+
+// ─── Buttons ─────────────────────────────────────────────────────────────────
+.btn {
+  display: inline-block;
+  border-radius: 0;
+  border: none;
+  background-color: v.$color-bronze;
+  color: v.$color-coal;
+  font-family: v.$font-body;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.95em 2em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background v.$transition-base, transform v.$transition-base;
+
+  &:hover {
+    background: v.$gradient-molten;
+    color: v.$color-coal;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-bronze-light;
+    outline-offset: 2px;
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(31, 27, 22, 0.4);
+
+  &:hover {
+    border-color: v.$color-bronze-light;
+    color: v.$color-bronze-light;
+    background: transparent;
+    transform: translateY(-1px);
+  }
+
+  .block--dark & {
+    border-color: rgba(240, 233, 220, 0.4);
+    color: v.$color-cream;
+
+    &:hover {
+      border-color: v.$color-bronze-light;
+      color: v.$color-bronze-light;
+    }
+  }
+}
+
+.btn--light {
+  background-color: v.$color-cream;
+  color: v.$color-coal;
+
+  &:hover {
+    background: v.$gradient-molten;
+    color: v.$color-coal;
+    transform: translateY(-1px);
+  }
+}
+
+// ─── Section blocks ──────────────────────────────────────────────────────────
 .block {
-  padding-block: v.$space-12;
+  padding-top: v.$space-12;
+  padding-bottom: v.$space-12;
 
   @include m.respond-to(lg) {
-    padding-block: v.$space-16;
+    padding-top: v.$space-16;
+    padding-bottom: v.$space-16;
   }
 }
 
 .block--alt {
-  background-color: v.$color-bg-alt;
+  background-color: v.$color-sand-deep;
 }
 
-.block--surface {
-  background-color: v.$color-surface;
+.block--paper {
+  background-color: v.$color-paper;
 }
 
 .block--dark {
-  background-color: v.$color-bg-dark;
-  color: v.$color-text-light;
+  position: relative;
+  background-color: v.$color-coal;
+  @include m.grain;
 
-  h1, h2, h3, h4, h5, h6 { color: v.$color-text-light; }
-  p { color: rgba(237, 232, 224, 0.72); }
-  .label { color: v.$color-burgundy-light; }
+  h1, h2, h3, h4, h5, h6 {
+    color: v.$color-cream;
+  }
+
+  p {
+    color: v.$color-cream-soft;
+  }
 }
 
+// ─── Containers ──────────────────────────────────────────────────────────────
 .container {
   width: 100%;
-  max-width: v.$container-max-width;
+  max-width: v.$container-width;
   margin-inline: auto;
-  padding-inline: v.$space-3;
+  padding-inline: 1.5rem;
 
   @include m.respond-to(md) {
-    padding-inline: v.$space-4;
+    padding-inline: 2rem;
   }
 }
 
 .container-lg {
-  max-width: v.$container-max-width-lg;
+  width: 100%;
+  max-width: v.$container-lg-width;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @include m.respond-to(md) {
+    padding-inline: 2rem;
+  }
 }
 
 .container-sm {
-  max-width: v.$container-max-width-sm;
+  width: 100%;
+  max-width: v.$container-sm-width;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @include m.respond-to(md) {
+    padding-inline: 2rem;
+  }
 }
 
 .container-xs {
-  max-width: v.$container-max-width-xs;
+  width: 100%;
+  max-width: v.$container-xs-width;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @include m.respond-to(md) {
+    padding-inline: 2rem;
+  }
+}
+
+// ─── Main layout ─────────────────────────────────────────────────────────────
+main {
+  padding-top: v.$header-height;
 }

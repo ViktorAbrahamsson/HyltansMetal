@@ -1,74 +1,96 @@
-.page_title {
+// ─── Intro block ─────────────────────────────────────────────────────────────
+.custom-orders__intro {}
+
+.custom-orders__h1 {
   margin-top: v.$space-2;
   margin-bottom: v.$space-4;
 }
 
-.intro {
-  color: v.$color-text-muted;
-  font-size: v.$font-size-lg;
+.custom-orders__lead {
   max-width: 60ch;
+  font-size: 1.25rem;
+  color: v.$color-ink-soft;
+  line-height: 1.65;
 }
 
-.categories_heading {
-  font-size: v.$font-size-2xl;
-  margin-bottom: v.$space-4;
-}
+// ─── Categories section ───────────────────────────────────────────────────────
+.custom-orders__categories-block {}
 
-.categories {
-  display: flex;
-  flex-direction: column;
-  gap: v.$space-2;
-}
-
-.category_item {
-  display: flex;
-  align-items: center;
-  gap: v.$space-3;
-  font-size: v.$font-size-lg;
-  color: v.$color-text;
-}
-
-.category_bullet {
-  color: v.$color-bronze;
-  font-family: v.$font-heading;
-  font-size: v.$font-size-xl;
-}
-
-.cta {
-  text-align: center;
-  background-color: v.$color-bg-alt;
-  border: 1px solid v.$color-border;
-  border-radius: v.$border-radius-lg;
-  padding: v.$space-10 v.$space-6;
-}
-
-.cta__heading {
-  margin-bottom: v.$space-3;
-}
-
-.cta__text {
-  color: v.$color-text-muted;
+.custom-orders__categories-h2 {
+  font-size: v.$font-size-display-3;
   margin-bottom: v.$space-6;
-  margin-inline: auto;
-  max-width: 48ch;
 }
 
-.cta__button {
-  display: inline-block;
-  padding: v.$space-2 v.$space-5;
-  background-color: v.$color-bronze;
-  color: #fff;
-  font-family: v.$font-body;
-  font-size: v.$font-size-sm;
-  font-weight: v.$font-weight-semibold;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.custom-orders__index-list {
+  list-style: none;
+}
+
+.custom-orders__index-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: v.$space-4;
+  padding-block: v.$space-4;
+  border-top: 1px solid v.$color-line;
   text-decoration: none;
-  border-radius: v.$border-radius-sm;
-  transition: background-color v.$transition-base;
+  color: inherit;
+  transition: color v.$transition-base;
+
+  &:last-child {
+    border-bottom: 1px solid v.$color-line;
+  }
 
   &:hover {
-    background-color: v.$color-bronze-dark;
-    color: #fff;
+    color: v.$color-bronze;
+
+    .custom-orders__index-arrow {
+      transform: translateX(4px);
+      color: v.$color-bronze;
+    }
+
+    .custom-orders__index-title {
+      color: v.$color-bronze-light;
+    }
   }
+}
+
+.custom-orders__index-stamp {
+  flex-shrink: 0;
+  color: v.$color-verdigris;
+}
+
+.custom-orders__index-title {
+  font-family: v.$font-display;
+  font-size: v.$font-size-display-3;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: v.$color-ink;
+  transition: color v.$transition-base;
+}
+
+.custom-orders__index-arrow {
+  font-family: v.$font-body;
+  font-size: 1.25rem;
+  color: v.$color-bronze;
+  transition: transform v.$transition-base, color v.$transition-base;
+  flex-shrink: 0;
+}
+
+// ─── CTA block ────────────────────────────────────────────────────────────────
+.custom-orders__cta-block {}
+
+.custom-orders__cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: v.$space-3;
+}
+
+.custom-orders__cta-h2 {
+  max-width: 22ch;
+}
+
+.custom-orders__cta-text {
+  max-width: 50ch;
 }

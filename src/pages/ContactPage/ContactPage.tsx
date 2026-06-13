@@ -9,65 +9,85 @@ export default function ContactPage() {
         <title>Kontakt – Hyltans Metall</title>
       </Helmet>
 
-      <section className="block contact-block">
+      <section className={`block contact-block ${styles['contact-page__section']}`}>
         <div className="container">
-          <div className={styles.layout}>
-            <div className={styles.info}>
-              <p className="label">Kom i kontakt</p>
-              <h1 className={styles.page_title}>Kontakt</h1>
+          <div className={styles['contact-page__layout']}>
 
-              <address className={styles.address}>
-                <div className={styles.address__item}>
-                  <span className={styles.address__label}>E-post</span>
-                  <a href={`mailto:${company.email}`}>{company.email}</a>
+            {/* Info column */}
+            <div className={styles['contact-page__info']}>
+              <p className="label">Kom i kontakt</p>
+              <h1 className={styles['contact-page__h1']}>Kontakt</h1>
+              <a
+                href={`mailto:${company.email}`}
+                className={styles['contact-page__email-link']}
+              >
+                {company.email}
+              </a>
+              <address className={styles['contact-page__address']}>
+                <div className={styles['contact-page__address-item']}>
+                  <span className={styles['contact-page__address-label']}>E-post</span>
+                  <span className={styles['contact-page__address-value']}>{company.email}</span>
                 </div>
-                <div className={styles.address__item}>
-                  <span className={styles.address__label}>Adress</span>
-                  <span>{company.name}</span>
-                  <span>{company.address}</span>
+                <div className={styles['contact-page__address-item']}>
+                  <span className={styles['contact-page__address-label']}>Adress</span>
+                  <span className={styles['contact-page__address-value']}>{company.name}</span>
+                  <span className={styles['contact-page__address-value']}>{company.address}</span>
                 </div>
               </address>
             </div>
 
-            <form className={styles.form} noValidate>
-              <h2 className={styles.form__heading}>Skicka ett meddelande</h2>
+            {/* Form column */}
+            <div className={styles['contact-page__form-card']}>
+              <form className={styles['contact-page__form']} noValidate>
+                <h2 className={styles['contact-page__form-heading']}>Skicka ett meddelande</h2>
 
-              <div className={styles.form__group}>
-                <label htmlFor="name" className={styles.form__label}>Namn</label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  className={styles.form__input}
-                  autoComplete="name"
-                />
-              </div>
+                <div className={styles['contact-page__form-group']}>
+                  <label htmlFor="contact-name" className={styles['contact-page__form-label']}>
+                    Namn
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    className={styles['contact-page__form-input']}
+                    autoComplete="name"
+                  />
+                </div>
 
-              <div className={styles.form__group}>
-                <label htmlFor="email" className={styles.form__label}>E-postadress</label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  className={styles.form__input}
-                  autoComplete="email"
-                />
-              </div>
+                <div className={styles['contact-page__form-group']}>
+                  <label htmlFor="contact-email" className={styles['contact-page__form-label']}>
+                    E-postadress
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    className={styles['contact-page__form-input']}
+                    autoComplete="email"
+                  />
+                </div>
 
-              <div className={styles.form__group}>
-                <label htmlFor="message" className={styles.form__label}>Meddelande</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  className={styles.form__textarea}
-                />
-              </div>
+                <div className={styles['contact-page__form-group']}>
+                  <label htmlFor="contact-message" className={styles['contact-page__form-label']}>
+                    Meddelande
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={5}
+                    className={styles['contact-page__form-textarea']}
+                  />
+                </div>
 
-              <button type="submit" className={styles.form__submit}>
-                Skicka meddelande
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  className={`btn ${styles['contact-page__form-submit']}`}
+                >
+                  Skicka meddelande
+                </button>
+              </form>
+            </div>
+
           </div>
         </div>
       </section>

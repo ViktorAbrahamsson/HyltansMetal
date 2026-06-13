@@ -1,117 +1,138 @@
-.layout {
+// ─── Page section ─────────────────────────────────────────────────────────────
+.contact-page__section {}
+
+.contact-page__layout {
   display: grid;
   grid-template-columns: 1fr;
   gap: v.$space-10;
 
   @include m.respond-to(lg) {
-    grid-template-columns: 1fr 1.6fr;
+    grid-template-columns: 2fr 3fr;
+    gap: v.$space-16;
     align-items: start;
   }
 }
 
-.page_title {
+// ─── Info column ─────────────────────────────────────────────────────────────
+.contact-page__info {}
+
+.contact-page__h1 {
   margin-top: v.$space-2;
-  margin-bottom: v.$space-6;
+  margin-bottom: v.$space-5;
 }
 
-.address {
+.contact-page__email-link {
+  display: inline-block;
+  font-family: v.$font-display;
+  font-size: v.$font-size-display-3;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: v.$color-bronze;
+  text-decoration: none;
+  line-height: 1.2;
+  margin-bottom: v.$space-6;
+  transition: color v.$transition-base;
+
+  &:hover {
+    color: v.$color-bronze-light;
+  }
+}
+
+.contact-page__address {
   font-style: normal;
   display: flex;
   flex-direction: column;
   gap: v.$space-4;
 }
 
-.address__item {
+.contact-page__address-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-
-  a, span {
-    font-size: v.$font-size-base;
-    color: v.$color-text;
-  }
-
-  a {
-    color: v.$color-bronze;
-    transition: color v.$transition-fast;
-    &:hover { color: v.$color-bronze-dark; }
-  }
+  gap: 0.25rem;
 }
 
-.address__label {
+.contact-page__address-label {
+  font-family: v.$font-body;
   font-size: v.$font-size-xs;
-  font-weight: v.$font-weight-semibold;
-  letter-spacing: 0.1em;
+  font-weight: 600;
   text-transform: uppercase;
-  color: v.$color-text-muted;
+  letter-spacing: 0.15em;
+  color: v.$color-ink-soft;
 }
 
-.form {
-  background-color: v.$color-surface;
-  border: 1px solid v.$color-border;
-  border-radius: v.$border-radius-lg;
-  padding: v.$space-6;
+.contact-page__address-value {
+  font-size: v.$font-size-md;
+  color: v.$color-ink;
+}
+
+// ─── Form column ─────────────────────────────────────────────────────────────
+.contact-page__form-card {
+  background-color: v.$color-paper;
+  border: 1px solid v.$color-line;
+  padding: v.$space-5;
+
+  @include m.respond-to(md) {
+    padding: v.$space-8;
+  }
+}
+
+.contact-page__form {
   display: flex;
   flex-direction: column;
   gap: v.$space-4;
 }
 
-.form__heading {
-  font-size: v.$font-size-2xl;
+.contact-page__form-heading {
+  font-size: v.$font-size-display-3;
   margin-bottom: v.$space-2;
 }
 
-.form__group {
+.contact-page__form-group {
   display: flex;
   flex-direction: column;
   gap: v.$space-1;
 }
 
-.form__label {
-  font-size: v.$font-size-sm;
-  font-weight: v.$font-weight-medium;
-  color: v.$color-text;
+.contact-page__form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: v.$color-ink-soft;
 }
 
-.form__input,
-.form__textarea {
-  width: 100%;
-  padding: v.$space-2 v.$space-3;
+.contact-page__form-input,
+.contact-page__form-textarea {
+  background-color: v.$color-sand;
+  border: 1px solid v.$color-line;
+  border-radius: 0;
+  padding: 0.85rem 1rem;
   font-family: v.$font-body;
-  font-size: v.$font-size-base;
-  color: v.$color-text;
-  background-color: v.$color-bg;
-  border: 1px solid v.$color-border;
-  border-radius: v.$border-radius-md;
-  transition: border-color v.$transition-fast;
+  font-size: v.$font-size-md;
+  color: v.$color-ink;
+  width: 100%;
+  transition: border-color v.$transition-base, box-shadow v.$transition-base;
   outline: none;
+  appearance: none;
 
   &:focus {
     border-color: v.$color-bronze;
+    box-shadow: 0 0 0 3px rgba(176, 122, 46, 0.15);
+  }
+
+  &::placeholder {
+    color: v.$color-ink-soft;
+    opacity: 0.5;
   }
 }
 
-.form__textarea {
+.contact-page__form-textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 140px;
 }
 
-.form__submit {
-  align-self: flex-start;
-  padding: v.$space-2 v.$space-5;
-  background-color: v.$color-bronze;
-  color: #fff;
-  font-family: v.$font-body;
-  font-size: v.$font-size-sm;
-  font-weight: v.$font-weight-semibold;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: none;
-  border-radius: v.$border-radius-sm;
-  cursor: pointer;
-  transition: background-color v.$transition-base;
+.contact-page__form-submit {
+  width: 100%;
 
-  &:hover {
-    background-color: v.$color-bronze-dark;
+  @include m.respond-to(md) {
+    width: auto;
   }
 }

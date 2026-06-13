@@ -1,17 +1,19 @@
-@use 'variables' as v;
-
+// ─── Responsive (mobile-first) ───────────────────────────────────────────────
 @mixin respond-to($bp) {
   @if $bp == sm {
-    @media (min-width: v.$bp-sm) { @content; }
+    @media (min-width: 480px) { @content; }
   } @else if $bp == md {
-    @media (min-width: v.$bp-md) { @content; }
+    @media (min-width: 768px) { @content; }
   } @else if $bp == lg {
-    @media (min-width: v.$bp-lg) { @content; }
+    @media (min-width: 1024px) { @content; }
   } @else if $bp == xl {
-    @media (min-width: v.$bp-xl) { @content; }
+    @media (min-width: 1280px) { @content; }
+  } @else {
+    @media (min-width: $bp) { @content; }
   }
 }
 
+// ─── Flex helpers ────────────────────────────────────────────────────────────
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -24,6 +26,7 @@
   justify-content: space-between;
 }
 
+// ─── Accessibility ───────────────────────────────────────────────────────────
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -36,11 +39,42 @@
   border: 0;
 }
 
-@mixin bronze-underline($color: v.$color-bronze) {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 2px;
-  background: $color;
-  margin-top: v.$space-2;
+// ─── Grain overlay ───────────────────────────────────────────────────────────
+// NOTE: does not set position — the caller must already be positioned
+// (relative/fixed/absolute), or the grain pseudo-element will escape it.
+@mixin grain {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23grain)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    z-index: 0;
+  }
+}
+
+// ─── Eyebrow label ───────────────────────────────────────────────────────────
+// Uses literal values to avoid circular @use dependency with variables.scss
+@mixin eyebrow($color: currentColor) {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: $color;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background-color: currentColor;
+    flex-shrink: 0;
+  }
 }

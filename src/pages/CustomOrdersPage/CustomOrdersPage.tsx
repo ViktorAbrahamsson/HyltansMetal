@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { customOrderCategories } from '@/data/products';
 import styles from './CustomOrdersPage.module.scss';
 
+const stampNumbers = ['01', '02', '03', '04', '05'];
+
 export default function CustomOrdersPage() {
   return (
     <>
@@ -10,11 +12,12 @@ export default function CustomOrdersPage() {
         <title>Specialtillverkning – Hyltans Metall</title>
       </Helmet>
 
-      <section className="block custom-orders-block">
+      {/* Intro block */}
+      <section className={`block custom-orders-block ${styles['custom-orders__intro']}`}>
         <div className="container container-sm">
           <p className="label">Skräddarsytt</p>
-          <h1 className={styles.page_title}>Specialtillverkning</h1>
-          <p className={styles.intro}>
+          <h1 className={styles['custom-orders__h1']}>Specialtillverkning</h1>
+          <p className={styles['custom-orders__lead']}>
             Har du ett projekt som kräver bronsgjutning? Vi tar oss an specialbeställningar
             av alla slag – från enskilda reservdelar till unika konstnärliga verk.
             Kontakta oss med din idé så berättar vi hur vi kan hjälpa dig.
@@ -22,31 +25,36 @@ export default function CustomOrdersPage() {
         </div>
       </section>
 
-      <section className="block categories-block">
+      {/* Categories section */}
+      <section className={`block block--paper categories-block ${styles['custom-orders__categories-block']}`}>
         <div className="container container-sm">
-          <h2 className={styles.categories_heading}>Vad kan vi gjuta?</h2>
-          <ul className={styles.categories}>
-            {customOrderCategories.map((cat) => (
-              <li key={cat.id} className={styles.category_item}>
-                <span className={styles.category_bullet} aria-hidden="true">—</span>
-                <span>{cat.title}</span>
+          <h2 className={styles['custom-orders__categories-h2']}>Vad kan vi gjuta?</h2>
+          <ul className={styles['custom-orders__index-list']}>
+            {customOrderCategories.map((cat, i) => (
+              <li key={cat.id}>
+                <Link to="/kontakt" className={styles['custom-orders__index-row']}>
+                  <span className={`batch-stamp ${styles['custom-orders__index-stamp']}`}>
+                    {stampNumbers[i]}
+                  </span>
+                  <span className={styles['custom-orders__index-title']}>{cat.title}</span>
+                  <span className={styles['custom-orders__index-arrow']} aria-hidden="true">→</span>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="block contact-cta-block">
+      {/* CTA block */}
+      <section className={`block block--dark contact-cta-block ${styles['custom-orders__cta-block']}`}>
         <div className="container container-xs">
-          <div className={styles.cta}>
-            <h2 className={styles.cta__heading}>Berätta om ditt projekt</h2>
-            <p className={styles.cta__text}>
+          <div className={styles['custom-orders__cta-inner']}>
+            <h2 className={styles['custom-orders__cta-h2']}>Berätta om ditt projekt</h2>
+            <p className={styles['custom-orders__cta-text']}>
               Skicka ett e-postmeddelande med en beskrivning av vad du behöver, så
               återkommer vi med mer information och prisuppgifter.
             </p>
-            <Link to="/kontakt" className={styles.cta__button}>
-              Kontakta oss
-            </Link>
+            <Link to="/kontakt" className="btn btn--light">Kontakta oss</Link>
           </div>
         </div>
       </section>
