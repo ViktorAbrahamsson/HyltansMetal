@@ -1,76 +1,80 @@
-// Colors
-$color-bg:           #F8F5F0;
-$color-bg-alt:       #EFEBE4;
-$color-bg-dark:      #1A1010;
-$color-surface:      #FFFFFF;
-$color-text:         #2A2A2A;
-$color-text-light:   #EDE8E0;
-$color-text-muted:   #7A706A;
-$color-bronze:       #A8841E;
-$color-bronze-light: #C8A030;
-$color-bronze-dark:  #8B6914;
-$color-burgundy:     #6B1E1E;
-$color-burgundy-light: #8C2A2A;
-$color-burgundy-dark:  #4A1010;
-$color-border:       #DDD5C8;
-$color-border-dark:  rgba(255, 255, 255, 0.12);
+// ─── Colours ────────────────────────────────────────────────────────────────
+$color-sand: #E9E2D4;
+$color-sand-deep: #DCD2BE;
+$color-paper: #F6F2E9;
+$color-ink: #1F1B16;
+$color-ink-soft: #6E655A;
+$color-coal: #161210;
+$color-coal-soft: #221C16;
+$color-cream: #F0E9DC;
+$color-cream-soft: rgba(240, 233, 220, 0.65);
 
-// Typography
-$font-heading: 'Cormorant Garamond', Georgia, serif;
-$font-body:    'Inter', system-ui, sans-serif;
+$color-bronze: #B07A2E;
+$color-bronze-light: #D9A24B;
+$color-bronze-deep: #82591F;
 
-$font-weight-regular:  400;
-$font-weight-medium:   500;
-$font-weight-semibold: 600;
+$color-verdigris: #5C8077;
+$color-verdigris-light: #84A99E;
 
-$font-size-xs:   0.75rem;
-$font-size-sm:   0.875rem;
-$font-size-base: 1rem;
-$font-size-lg:   1.125rem;
-$font-size-xl:   1.375rem;
-$font-size-2xl:  1.75rem;
-$font-size-3xl:  2.5rem;
-$font-size-4xl:  3.5rem;
-$font-size-5xl:  5rem;
+$color-line: rgba(31, 27, 22, 0.16);
+$color-line-dark: rgba(240, 233, 220, 0.14);
 
-// Spacing (8px base grid)
-$space-1:  0.5rem;   // 8px
-$space-2:  1rem;     // 16px
-$space-3:  1.5rem;   // 24px
-$space-4:  2rem;     // 32px
-$space-5:  2.5rem;   // 40px
-$space-6:  3rem;     // 48px
-$space-8:  4rem;     // 64px
-$space-10: 5rem;     // 80px
-$space-12: 6rem;     // 96px
-$space-16: 8rem;     // 128px
-$space-20: 10rem;    // 160px
+$gradient-molten: linear-gradient(110deg, #E2B05E 0%, #B07A2E 48%, #8A5D20 100%);
 
-// Layout
-$container-max-width:    1200px;
-$container-max-width-lg: 1440px;
-$container-max-width-sm: 900px;
-$container-max-width-xs: 640px;
-$header-height:          72px;
+// ─── Typography ─────────────────────────────────────────────────────────────
+$font-display: 'Fraunces', Georgia, serif;
+$font-body: 'Inter', system-ui, sans-serif;
 
-// Borders
-$border-radius-sm: 2px;
-$border-radius-md: 6px;
-$border-radius-lg: 12px;
+$font-size-display:   clamp(3.25rem, 9vw, 6.5rem);
+$font-size-display-2: clamp(2.25rem, 5vw, 3.75rem);
+$font-size-display-3: clamp(1.5rem, 2.5vw, 2rem);
 
-// Z-index
-$z-base:   0;
-$z-raised: 10;
-$z-header: 100;
-$z-modal:  200;
+$font-size-xs:  0.75rem;
+$font-size-sm:  0.875rem;
+$font-size-md:  1rem;
+$font-size-lg:  1.125rem;
+$font-size-xl:  1.375rem;
 
-// Transitions
-$transition-fast: 150ms ease;
-$transition-base: 250ms ease;
-$transition-slow: 400ms ease;
+// ─── Spacing (8px grid) ─────────────────────────────────────────────────────
+$space-1:  0.5rem;
+$space-2:  1rem;
+$space-3:  1.5rem;
+$space-4:  2rem;
+$space-5:  2.5rem;
+$space-6:  3rem;
+$space-8:  4rem;
+$space-10: 5rem;
+$space-12: 6rem;
+$space-16: 8rem;
+$space-20: 10rem;
 
-// Breakpoints
+// ─── Layout ──────────────────────────────────────────────────────────────────
+$header-height: 76px;
+
+$container-width:    1200px;
+$container-lg-width: 1440px;
+$container-sm-width: 900px;
+$container-xs-width: 640px;
+
+// ─── Breakpoints ─────────────────────────────────────────────────────────────
 $bp-sm: 480px;
 $bp-md: 768px;
 $bp-lg: 1024px;
 $bp-xl: 1280px;
+
+// ─── Transitions ─────────────────────────────────────────────────────────────
+$transition-fast:   150ms ease;
+$transition-base:   250ms ease;
+$transition-slow:   450ms ease;
+
+// ─── Z-index ─────────────────────────────────────────────────────────────────
+$z-base:    1;
+$z-above:   10;
+$z-nav:     100;
+$z-overlay: 200;
+$z-header:  300;
+$z-modal:   400;
+
+// ─── Shadows ─────────────────────────────────────────────────────────────────
+$shadow-card: 0 12px 40px rgba(31, 27, 22, 0.07);
+$shadow-glow: 0 0 40px rgba(176, 122, 46, 0.18);

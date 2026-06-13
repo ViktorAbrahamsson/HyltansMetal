@@ -41,11 +41,12 @@ export default function ManufacturingPage() {
         <title>Tillverkning – Hyltans Metall</title>
       </Helmet>
 
-      <section className="block manufacturing-block">
+      {/* Intro block */}
+      <section className={`block manufacturing-block ${styles['mfg-intro']}`}>
         <div className="container container-sm">
           <p className="label">Processen</p>
-          <h1 className={styles.page_title}>Sandgjutning i brons</h1>
-          <p className={styles.intro}>
+          <h1 className={styles['mfg-intro__h1']}>Sandgjutning i brons</h1>
+          <p className={styles['mfg-intro__lead']}>
             Sandgjutning är en av världens äldsta metallbearbetningsmetoder. Hos oss
             utförs varje steg för hand, med metoder som beprövats i hundratals år och
             förfinats under tre generationer.
@@ -53,15 +54,24 @@ export default function ManufacturingPage() {
         </div>
       </section>
 
-      <section className="block steps-block">
+      {/* Steps section */}
+      <section className={`block block--paper steps-block ${styles['mfg-steps']}`}>
         <div className="container container-sm">
-          <ol className={styles.steps}>
+          <ol className={styles['mfg-steps__list']}>
             {steps.map((step) => (
-              <li key={step.number} className={styles.step}>
-                <span className={styles.step__number}>{step.number}</span>
-                <div className={styles.step__content}>
-                  <h2 className={styles.step__title}>{step.title}</h2>
-                  <p className={styles.step__description}>{step.description}</p>
+              <li key={step.number} className={styles['mfg-step']}>
+                <span
+                  className={styles['mfg-step__numeral']}
+                  aria-hidden="true"
+                >
+                  {step.number}
+                </span>
+                <div className={styles['mfg-step__body']}>
+                  <div className={styles['mfg-step__stamp-row']}>
+                    <span className="batch-stamp">Steg {step.number}</span>
+                  </div>
+                  <h2 className={styles['mfg-step__title']}>{step.title}</h2>
+                  <p className={styles['mfg-step__desc']}>{step.description}</p>
                 </div>
               </li>
             ))}
