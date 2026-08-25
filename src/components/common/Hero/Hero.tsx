@@ -24,7 +24,7 @@ export default function Hero() {
           Hyltans <span className="molten">Metall</span>
         </h1>
         <p className={styles['hero__tagline']}>
-          Handgjord sandgjutning i brons sedan 1926
+          Sandgjutning i brons och mässing. Handgjort i Gnosjö sedan 1926.
         </p>
         <div className={styles['hero__actions']}>
           <Link to="/produkter" className="btn">Se våra produkter</Link>

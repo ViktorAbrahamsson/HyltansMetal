@@ -1,36 +1,56 @@
 import { Helmet } from 'react-helmet-async';
+import Figure from '@/components/common/Figure/Figure';
+import { images } from '@/assets/images/manifest';
 import styles from './ManufacturingPage.module.scss';
 
 const steps = [
   {
     number: '01',
-    title: 'Modellen förbereds',
+    title: 'Formen packas',
     description:
-      'Allt börjar med en modell av det föremål som ska gjutas. Modellen kan vara i trä, plast eller ett befintligt föremål. Den formar sandavtrycket som sedan används vid gjutningen.',
+      'Engångsformar tillverkas genom att sand packas för hand runt en modell av det man vill ha tillverkat.',
+    image: images['process/02-sandpackning'],
+    imageAlt: 'Gjutsand packas för hand runt en bronskula i gjutformen.',
   },
   {
     number: '02',
-    title: 'Sanden packas',
+    title: 'Modellen plockas ut',
     description:
-      'Fin gjutsand packas noggrant för hand runt modellen i en gjutform. Varje form är unik och används bara en gång – en tradition vi behållit sedan 1926.',
+      'Därefter delas formhalvorna och modellen plockas ut. Ingjutskanaler skärs ut ur sanden. Halvorna läggs ihop och är klara för gjutning.',
+    image: images['process/01-modell'],
+    imageAlt: 'En modell läggs på plats i gjutlådan inför formningen.',
   },
   {
     number: '03',
-    title: 'Bronsen smälts',
+    title: 'Metallen smälts',
     description:
-      'Brons värms i vår ugn till cirka 1200 grader Celsius tills den är helt flytande. Temperaturen och tidpunkten för gjutningen är avgörande för slutresultatet.',
+      'Metallen smälts i en kokseldad gjutugn. När metallen uppnår ca 1200 grader kan gjutningen påbörjas.',
+    image: images['process/03-smaltning'],
+    imageAlt: 'Glödande degel med smält metall omgiven av lågor i koksbädden.',
   },
   {
     number: '04',
-    title: 'Gjutningen',
+    title: 'Formarna fylls',
     description:
-      'Den glödande bronsen hälls varsamt in i sandformen. Metallen fyller varje detalj i avtrycket och stelnar till den form som modellen gav.',
+      'Den smälta metallen hälls i formen genom ingjutskanalerna och fyller avtrycket som modellen lämnat efter sig.',
+    image: images['process/04-gjutning'],
+    imageAlt: 'Smält metall hälls ur skänken ner i sandformen.',
   },
   {
     number: '05',
-    title: 'Rensning och finish',
+    title: 'Formen slås sönder',
     description:
-      'När bronsen svalnat bryts sandformen upp och gjutgodset rensas från sand och gjutkanaler. Sedan slipas och poleras föremålet för hand till önskat utseende.',
+      'Efter att metallen har svalnat kan formarna slås sönder och den gjutna detaljen kan plockas ut.',
+    image: images['process/05-rensning'],
+    imageAlt: 'Nygjutna föremål med gjutkanaler kvar i de uppbrutna sandformarna.',
+  },
+  {
+    number: '06',
+    title: 'Efterbearbetning',
+    description:
+      'Efter kapning av gjutkanalerna återstår efterbearbetning genom slipning, svarvning, polering med mera.',
+    image: images['workshop/polerat'],
+    imageAlt: 'Färdigpolerade malmljusstakar uppradade på arbetsbänken.',
   },
 ];
 
@@ -38,27 +58,27 @@ export default function ManufacturingPage() {
   return (
     <>
       <Helmet>
-        <title>Tillverkning – Hyltans Metall</title>
+        <title>Tillverkningen. Hyltans Metall</title>
       </Helmet>
 
       {/* Intro block */}
       <section className={`block manufacturing-block ${styles['mfg-intro']}`}>
         <div className="container container-sm">
           <p className="label">Processen</p>
-          <h1 className={styles['mfg-intro__h1']}>Sandgjutning i brons</h1>
+          <h1 className={styles['mfg-intro__h1']}>Tillverkningen</h1>
           <p className={styles['mfg-intro__lead']}>
-            Sandgjutning är en av världens äldsta metallbearbetningsmetoder. Hos oss
-            utförs varje steg för hand, med metoder som beprövats i hundratals år och
-            förfinats under tre generationer.
+            Varje form används bara en gång. Sanden packas för hand runt modellen,
+            metallen smälts i en kokseldad gjutugn och formen slås sönder när godset
+            svalnat. Allt med samma metoder som vid företagets start 1926.
           </p>
         </div>
       </section>
 
       {/* Steps section */}
       <section className={`block block--paper steps-block ${styles['mfg-steps']}`}>
-        <div className="container container-sm">
+        <div className="container">
           <ol className={styles['mfg-steps__list']}>
-            {steps.map((step) => (
+            {steps.map((step, i) => (
               <li key={step.number} className={styles['mfg-step']}>
                 <span
                   className={styles['mfg-step__numeral']}
@@ -67,12 +87,17 @@ export default function ManufacturingPage() {
                   {step.number}
                 </span>
                 <div className={styles['mfg-step__body']}>
-                  <div className={styles['mfg-step__stamp-row']}>
-                    <span className="batch-stamp">Steg {step.number}</span>
-                  </div>
                   <h2 className={styles['mfg-step__title']}>{step.title}</h2>
                   <p className={styles['mfg-step__desc']}>{step.description}</p>
                 </div>
+                <Figure
+                  image={step.image}
+                  alt={step.imageAlt}
+                  ratio="landscape"
+                  sizes="(min-width: 1024px) 38vw, (min-width: 768px) 60vw, 100vw"
+                  priority={i === 0}
+                  className={styles['mfg-step__media']}
+                />
               </li>
             ))}
           </ol>

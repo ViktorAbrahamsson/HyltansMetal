@@ -3,12 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 const navLinks = [
-  { to: '/', label: 'Hem', index: '01' },
-  { to: '/om-oss', label: 'Om oss', index: '02' },
-  { to: '/tillverkning', label: 'Tillverkning', index: '03' },
-  { to: '/produkter', label: 'Produkter', index: '04' },
-  { to: '/specialtillverkning', label: 'Specialtillverkning', index: '05' },
-  { to: '/kontakt', label: 'Kontakt', index: '06' },
+  { to: '/', label: 'Start' },
+  { to: '/om-oss', label: 'Om företaget' },
+  { to: '/tillverkning', label: 'Tillverkningen' },
+  { to: '/produkter', label: 'Produkter' },
+  { to: '/kontakt', label: 'Kontakta oss' },
 ];
 
 export default function Header() {
@@ -46,7 +45,7 @@ export default function Header() {
       ].join(' ')}
     >
       <div className={styles.header__inner}>
-        <NavLink to="/" className={styles.logo} aria-label="Hyltans Metall – startsida">
+        <NavLink to="/" className={styles.logo} aria-label="Hyltans Metall. Startsida">
           <span className={styles.logo__name}>Hyltans Metall</span>
           <span className={styles.logo__tagline}>Sedan 1926</span>
         </NavLink>
@@ -85,7 +84,7 @@ export default function Header() {
       <div className={[styles.overlay, menuOpen ? styles['overlay--open'] : ''].join(' ')} aria-hidden={!menuOpen}>
         <nav aria-label="Mobilnavigation">
           <ul className={styles.overlay__list}>
-            {navLinks.map(({ to, label, index }, i) => (
+            {navLinks.map(({ to, label }, i) => (
               <li
                 key={to}
                 className={styles.overlay__item}
@@ -99,7 +98,6 @@ export default function Header() {
                   }
                   tabIndex={menuOpen ? 0 : -1}
                 >
-                  <span className={styles.overlay__index}>{index}</span>
                   {label}
                 </NavLink>
               </li>

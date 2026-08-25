@@ -6,8 +6,10 @@ $color-ink: #1F1B16;
 $color-ink-soft: #6E655A;
 $color-coal: #161210;
 $color-coal-soft: #221C16;
-$color-cream: #F0E9DC;
-$color-cream-soft: rgba(240, 233, 220, 0.65);
+// Text on dark surfaces. Pure white rather than a warm cream, so headings and
+// body copy on .block--dark, the header and the footer stay legible.
+$color-cream: #FFFFFF;
+$color-cream-soft: rgba(255, 255, 255, 0.82);
 
 $color-bronze: #B07A2E;
 $color-bronze-light: #D9A24B;
@@ -20,6 +22,30 @@ $color-line: rgba(31, 27, 22, 0.16);
 $color-line-dark: rgba(240, 233, 220, 0.14);
 
 $gradient-molten: linear-gradient(110deg, #E2B05E 0%, #B07A2E 48%, #8A5D20 100%);
+
+// A specular highlight band, sized wider than the element and slid across it on
+// hover so buttons catch the light the way polished brass does. Transparent at
+// both ends of the travel, so it is only visible mid-sweep.
+// Both layers below are painted at 300% width and slid from position 0% to
+// 100%. That means the button shows gradient 0-33% at rest and 67-100% when
+// hovered, so every colour stop is kept inside 42-58% -- clear of both resting
+// and hovered windows. Widen those stops and the fill bleeds in before hover or
+// stops short of the edge after it.
+$gradient-sheen: linear-gradient(
+  100deg,
+  transparent 0 42%,
+  rgba(255, 255, 255, 0.55) 50%,
+  transparent 58% 100%
+);
+
+// Half transparent, half bright brass. Slid across the button on hover, it wipes
+// a solid fill into place and *stays* there, so a hovered button ends visibly
+// different from a resting one.
+$gradient-brass-wipe: linear-gradient(
+  100deg,
+  transparent 0 46%,
+  $color-bronze-light 54% 100%
+);
 
 // ─── Typography ─────────────────────────────────────────────────────────────
 $font-display: 'Fraunces', Georgia, serif;
@@ -34,6 +60,7 @@ $font-size-sm:  0.875rem;
 $font-size-md:  1rem;
 $font-size-lg:  1.125rem;
 $font-size-xl:  1.375rem;
+$font-size-lead: 1.25rem;
 
 // ─── Spacing (8px grid) ─────────────────────────────────────────────────────
 $space-1:  0.5rem;
@@ -52,7 +79,6 @@ $space-20: 10rem;
 $header-height: 76px;
 
 $container-width:    1200px;
-$container-lg-width: 1440px;
 $container-sm-width: 900px;
 $container-xs-width: 640px;
 

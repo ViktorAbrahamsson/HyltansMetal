@@ -56,6 +56,15 @@
   }
 }
 
+// ─── Focus ring ──────────────────────────────────────────────────────────────
+// Literal colors to avoid circular @use with variables.scss.
+@mixin focus-ring($color: #B07A2E) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 3px;
+  }
+}
+
 // ─── Eyebrow label ───────────────────────────────────────────────────────────
 // Uses literal values to avoid circular @use dependency with variables.scss
 @mixin eyebrow($color: currentColor) {

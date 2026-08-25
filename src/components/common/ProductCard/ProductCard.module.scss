@@ -2,56 +2,26 @@
   background-color: v.$color-paper;
   border: 1px solid v.$color-line;
   border-radius: 0;
-  padding: v.$space-4;
   min-height: 280px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: background-color v.$transition-base, border-color v.$transition-base;
+  overflow: hidden;
   cursor: default;
-
-  &:hover {
-    background-color: v.$color-coal;
-    border-color: rgba(240, 233, 220, 0.1);
-
-    .card__title {
-      color: v.$color-cream;
-    }
-
-    .card__desc {
-      color: v.$color-cream-soft;
-    }
-
-    .card__stamp {
-      color: v.$color-verdigris-light;
-    }
-
-    .card__rule {
-      width: 56px;
-    }
-  }
 }
 
-// ─── Top row ─────────────────────────────────────────────────────────────────
-.card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: v.$space-3;
-}
-
-.card__stamp {
-  color: v.$color-verdigris;
-  transition: color v.$transition-base;
-}
-
-.card__mark {
-  display: block;
-  width: 10px;
-  height: 10px;
-  background-color: v.$color-bronze;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+// ─── Media ───────────────────────────────────────────────────────────────────
+.card__media {
   flex-shrink: 0;
+  border-bottom: 1px solid v.$color-line;
+}
+
+// ─── Body ────────────────────────────────────────────────────────────────────
+.card__body {
+  padding: v.$space-4;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 // ─── Title ───────────────────────────────────────────────────────────────────
@@ -65,7 +35,6 @@
   flex: 1;
   display: flex;
   align-items: flex-start;
-  transition: color v.$transition-base;
   margin-bottom: v.$space-3;
 }
 
@@ -81,7 +50,6 @@
   color: v.$color-ink-soft;
   line-height: 1.6;
   max-width: none;
-  transition: color v.$transition-base;
 }
 
 .card__rule {
@@ -89,5 +57,4 @@
   width: 32px;
   height: 1px;
   background-color: v.$color-bronze;
-  transition: width v.$transition-base;
 }

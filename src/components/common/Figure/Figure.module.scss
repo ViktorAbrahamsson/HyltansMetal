@@ -1,0 +1,69 @@
+.fig {
+  position: relative;
+  overflow: hidden;
+  background-color: v.$color-sand-deep;
+
+  // .fig is positioned, so the grain pseudo-element stays inside it.
+  @include m.grain;
+
+  // Grain sits above both the placeholder and the photo.
+  &::after {
+    z-index: 2;
+  }
+}
+
+// ─── Blurred placeholder ─────────────────────────────────────────────────────
+.fig__blur {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px);
+  // Overscale so the blur does not feather in from the edges.
+  transform: scale(1.15);
+  transition: opacity v.$transition-slow;
+  z-index: 0;
+}
+
+.fig__blur--hidden {
+  opacity: 0;
+  // Drop the blurred layer out of compositing once it has faded, rather than
+  // leaving a filtered element painting under every photo on the page.
+  visibility: hidden;
+  transition: opacity v.$transition-slow, visibility 0s 450ms;
+}
+
+// ─── Photo ───────────────────────────────────────────────────────────────────
+// No opacity gate: an <img> without data is transparent anyway, so the blur
+// behind it does the placeholder work and the photo paints the moment the
+// browser decodes it — no fade to sit through, nothing to strand it hidden.
+.fig__img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform v.$transition-slow;
+}
+
+// ─── Ratios ──────────────────────────────────────────────────────────────────
+.fig--portrait {
+  aspect-ratio: 4 / 5;
+}
+
+.fig--landscape {
+  aspect-ratio: 3 / 2;
+}
+
+.fig--wide {
+  aspect-ratio: 16 / 9;
+}
+
+.fig--banner {
+  aspect-ratio: 2 / 1;
+
+  @include m.respond-to(md) {
+    aspect-ratio: 3.2 / 1;
+  }
+}

@@ -67,13 +67,19 @@
 }
 
 // ─── Ghost numeral ───────────────────────────────────────────────────────────
+// Kept fully inside the hero. The section clips its overflow, so bleeding the
+// numeral off the bottom edge cut the digits in half on small screens.
 .hero__ghost {
   position: absolute;
-  right: -2rem;
-  bottom: -2rem;
+  right: 1.5rem;
+  bottom: v.$space-6;
   z-index: 1;
   line-height: 0.85;
   animation: hero-ghost-breathe 9s ease-in-out infinite;
+
+  @include m.respond-to(md) {
+    right: 2rem;
+  }
 
   @include m.respond-to(lg) {
     right: 2%;
@@ -135,20 +141,26 @@
 }
 
 // ─── Scroll cue ──────────────────────────────────────────────────────────────
+// Centred box the same width as .container, with the cue pinned to its left
+// edge, so it lines up with the hero copy at every screen width instead of
+// sitting mid-screen or hugging the viewport edge.
 .hero__scroll-cue {
   position: absolute;
   bottom: v.$space-4;
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  max-width: v.$container-width;
+  padding-inline: 1.5rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: v.$space-1;
+  pointer-events: none;
 
-  @include m.respond-to(lg) {
-    left: 2rem;
-    transform: none;
+  @include m.respond-to(md) {
+    padding-inline: 2rem;
   }
 }
 
@@ -167,7 +179,7 @@
   display: block;
   width: 1px;
   height: 48px;
-  background: v.$color-bronze;
+  background: v.$color-bronze-light;
   animation: hero-pulse-line 2s ease-in-out infinite;
 }
 

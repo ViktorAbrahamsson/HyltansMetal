@@ -8,7 +8,7 @@
 
 .mfg-intro__lead {
   max-width: 60ch;
-  font-size: 1.25rem;
+  font-size: v.$font-size-lead;
   color: v.$color-ink-soft;
   line-height: 1.65;
 }
@@ -36,16 +36,37 @@
     gap: v.$space-8;
     align-items: start;
   }
+
+  // Photo moves into its own column once there is room for it beside the text.
+  @include m.respond-to(lg) {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 38%);
+  }
+}
+
+.mfg-step__media {
+  @include m.respond-to(md) {
+    grid-column: 2;
+  }
+
+  @include m.respond-to(lg) {
+    grid-column: 3;
+    grid-row: 1;
+  }
 }
 
 .mfg-step__numeral {
   font-family: v.$font-display;
   font-size: clamp(4rem, 8vw, 7rem);
+  // Fraunces has no tabular figures, so "01" is ~1.06em wide and "04" ~1.23em.
+  // A floor wider than the widest pair keeps the numeral column — and the
+  // photos beside it — aligned across every step.
+  min-width: 1.3em;
   font-weight: 500;
   line-height: 0.85;
-  color: transparent;
-  -webkit-text-stroke: 1px v.$color-bronze;
-  opacity: 0.35;
+  // Solid bronze fill. With the "Steg xx" stamp gone this numeral is the only
+  // thing marking the sequence, so it is no longer a faint outline.
+  color: v.$color-bronze-light;
+  -webkit-text-stroke: 0;
   pointer-events: none;
   user-select: none;
   flex-shrink: 0;
@@ -58,12 +79,6 @@
   gap: v.$space-2;
 }
 
-.mfg-step__stamp-row {
-  display: flex;
-  align-items: center;
-  gap: v.$space-2;
-  margin-bottom: v.$space-1;
-}
 
 .mfg-step__title {
   font-size: v.$font-size-display-3;

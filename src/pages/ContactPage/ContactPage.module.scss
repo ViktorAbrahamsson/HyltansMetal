@@ -36,6 +36,8 @@
   &:hover {
     color: v.$color-bronze-light;
   }
+
+  @include m.focus-ring(#B07A2E);
 }
 
 .contact-page__address {
@@ -113,6 +115,10 @@
   outline: none;
   appearance: none;
 
+  &:hover {
+    border-color: v.$color-bronze;
+  }
+
   &:focus {
     border-color: v.$color-bronze;
     box-shadow: 0 0 0 3px rgba(176, 122, 46, 0.15);
@@ -135,4 +141,12 @@
   @include m.respond-to(md) {
     width: auto;
   }
+}
+
+
+.contact-page__form-note {
+  margin-top: v.$space-3;
+  font-size: v.$font-size-sm;
+  color: v.$color-ink-soft;
+  line-height: 1.6;
 }

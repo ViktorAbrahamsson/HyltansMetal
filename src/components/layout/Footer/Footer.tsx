@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { company } from '@/data/company';
 import styles from './Footer.module.scss';
 
 const navLinks = [
-  { to: '/', label: 'Hem' },
-  { to: '/om-oss', label: 'Om oss' },
-  { to: '/tillverkning', label: 'Tillverkning' },
+  { to: '/', label: 'Start' },
+  { to: '/om-oss', label: 'Om företaget' },
+  { to: '/tillverkning', label: 'Tillverkningen' },
   { to: '/produkter', label: 'Produkter' },
-  { to: '/specialtillverkning', label: 'Specialtillverkning' },
-  { to: '/kontakt', label: 'Kontakt' },
+  { to: '/kontakt', label: 'Kontakta oss' },
 ];
 
 export default function Footer() {
@@ -16,6 +15,7 @@ export default function Footer() {
 
   return (
     <footer className={`block--dark ${styles.footer}`}>
+      <span className={`ghost-numeral ${styles['footer__ghost']}`} aria-hidden="true">1926</span>
       <div className={`container ${styles['footer__inner']}`}>
         <div className={styles.headline}>
           <p className={styles.headline__text}>
@@ -35,7 +35,18 @@ export default function Footer() {
             <ul className={styles['footer__nav-list']}>
               {navLinks.map(({ to, label }) => (
                 <li key={to}>
-                  <Link to={to} className={styles['footer__nav-link']}>{label}</Link>
+                  <NavLink
+                    to={to}
+                    end={to === '/'}
+                    className={({ isActive }) =>
+                      [
+                        styles['footer__nav-link'],
+                        isActive ? styles['footer__nav-link--active'] : '',
+                      ].join(' ')
+                    }
+                  >
+                    {label}
+                  </NavLink>
                 </li>
               ))}
             </ul>

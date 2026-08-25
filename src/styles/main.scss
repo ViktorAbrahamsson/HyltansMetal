@@ -7,6 +7,17 @@
   padding: 0;
 }
 
+// ─── Reduced motion ──────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 // ─── Base ────────────────────────────────────────────────────────────────────
 html {
   scroll-behavior: smooth;
@@ -98,7 +109,16 @@ a {
   display: inline-block;
   border-radius: 0;
   border: none;
+  // Three background layers, from top: the sheen glint, the brass wipe that
+  // becomes the hover fill, and the molten blend as the resting face. Only the
+  // positions animate, so hover sweeps a highlight across while the brighter
+  // fill wipes in behind it and stays. The reduced-motion block in this file
+  // collapses the movement for anyone who asks for that.
   background-color: v.$color-bronze;
+  background-image: v.$gradient-sheen, v.$gradient-brass-wipe, v.$gradient-molten;
+  background-size: 300% 100%, 300% 100%, 100% 100%;
+  background-position: 0% 0, 0% 0, 0 0;
+  background-repeat: no-repeat;
   color: v.$color-coal;
   font-family: v.$font-body;
   font-size: 0.8125rem;
@@ -108,52 +128,66 @@ a {
   padding: 0.95em 2em;
   text-decoration: none;
   cursor: pointer;
-  transition: background v.$transition-base, transform v.$transition-base;
+  transition: background-position v.$transition-slow, color v.$transition-base;
 
-  &:hover {
-    background: v.$gradient-molten;
-    color: v.$color-coal;
-    transform: translateY(-1px);
-  }
-
+  &:hover,
   &:focus-visible {
-    outline: 2px solid v.$color-bronze-light;
-    outline-offset: 2px;
+    background-position: 100% 0, 100% 0, 0 0;
+    color: v.$color-coal;
   }
+
+  @include m.focus-ring(#D9A24B);
 }
 
 .btn--ghost {
-  background: transparent;
+  // Outlined at rest, then the same brass wipe and sheen as a solid button.
+  background-color: transparent;
+  background-image: v.$gradient-sheen, v.$gradient-brass-wipe;
+  background-size: 300% 100%, 300% 100%;
+  background-position: 0% 0, 0% 0;
   color: inherit;
   border: 1px solid rgba(31, 27, 22, 0.4);
+  transition: background-position v.$transition-slow, border-color v.$transition-base,
+    color v.$transition-base;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
+    background-position: 100% 0, 100% 0;
     border-color: v.$color-bronze-light;
-    color: v.$color-bronze-light;
-    background: transparent;
-    transform: translateY(-1px);
+    color: v.$color-coal;
   }
 
+  @include m.focus-ring(#D9A24B);
+
+  // Exception: the ghost button on a dark section stays flat and transparent.
   .block--dark & {
-    border-color: rgba(240, 233, 220, 0.4);
+    background-image: none;
+    border-color: rgba(255, 255, 255, 0.4);
     color: v.$color-cream;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       border-color: v.$color-bronze-light;
       color: v.$color-bronze-light;
     }
+
+    @include m.focus-ring(#D9A24B);
   }
 }
 
 .btn--light {
   background-color: v.$color-cream;
+  background-image: v.$gradient-sheen, v.$gradient-brass-wipe;
+  background-size: 300% 100%, 300% 100%;
   color: v.$color-coal;
 
-  &:hover {
-    background: v.$gradient-molten;
+  &:hover,
+  &:focus-visible {
+    background-position: 100% 0, 100% 0;
     color: v.$color-coal;
-    transform: translateY(-1px);
   }
+
+  @include m.focus-ring(#D9A24B);
 }
 
 // ─── Section blocks ──────────────────────────────────────────────────────────
@@ -193,17 +227,6 @@ a {
 .container {
   width: 100%;
   max-width: v.$container-width;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-
-  @include m.respond-to(md) {
-    padding-inline: 2rem;
-  }
-}
-
-.container-lg {
-  width: 100%;
-  max-width: v.$container-lg-width;
   margin-inline: auto;
   padding-inline: 1.5rem;
 

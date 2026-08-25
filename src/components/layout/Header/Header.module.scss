@@ -57,7 +57,7 @@
   justify-content: space-between;
   height: 100%;
   padding-inline: 1.5rem;
-  max-width: v.$container-lg-width;
+  max-width: v.$container-width;
   margin-inline: auto;
 
   @include m.respond-to(md) {
@@ -73,6 +73,7 @@
   gap: 0;
   // keep the logo above the mobile overlay (flex items respect z-index)
   z-index: v.$z-modal;
+  @include m.focus-ring(#D9A24B);
 }
 
 .logo__name {
@@ -133,29 +134,56 @@
     left: 0;
     width: 0;
     height: 1px;
-    background-color: v.$color-bronze;
+    background-color: v.$color-bronze-light;
     transition: width v.$transition-base;
   }
+
+  @include m.focus-ring(#D9A24B);
 }
 
-.nav__link--active {
-  color: v.$color-cream;
+// Active page is marked in bronze rather than with an underline. Doubled-up
+// selector because `.header--solid .nav__link` and `.header--transparent
+// .nav__link` both set `color` with two classes and would otherwise win.
+.nav__link.nav__link--active {
+  color: v.$color-bronze-light;
+  font-weight: 600;
+
+  &:hover {
+    color: v.$color-bronze-light;
+  }
 
   &::after {
-    width: 16px;
+    width: 0;
   }
 }
 
 // ─── Burger ──────────────────────────────────────────────────────────────────
 .burger {
+  // 44px square: a comfortable touch target, and a bordered plate that echoes
+  // the outlined ghost button rather than three bare floating lines.
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 8px;
-  background: none;
-  border: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.28);
   cursor: pointer;
   z-index: v.$z-modal;
+  transition: border-color v.$transition-base, background-color v.$transition-base;
+  @include m.focus-ring(#D9A24B);
+
+  &:hover {
+    border-color: v.$color-bronze-light;
+  }
+
+  .header--menu-open & {
+    border-color: v.$color-bronze-light;
+    background-color: rgba(217, 162, 75, 0.12);
+  }
 
   @include m.respond-to(lg) {
     display: none;
@@ -164,14 +192,24 @@
 
 .burger__bar {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 1.5px;
   background-color: v.$color-cream;
-  transition: transform v.$transition-base, opacity v.$transition-base;
+  transition: transform v.$transition-base, opacity v.$transition-base,
+    width v.$transition-base, background-color v.$transition-base;
 
+  // Tapered middle bar gives the closed state some character.
+  &:nth-child(2) {
+    width: 14px;
+  }
+
+  // Two classes, so this outranks the .header--solid / --transparent rules that
+  // also colour the bars.
   .header--menu-open & {
+    background-color: v.$color-bronze-light;
+
     &:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    &:nth-child(2) { opacity: 0; }
+    &:nth-child(2) { opacity: 0; width: 22px; }
     &:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   }
 }
@@ -234,20 +272,15 @@
   &:hover {
     color: v.$color-bronze-light;
   }
+
+  @include m.focus-ring(#D9A24B);
 }
 
 .overlay__link--active {
   color: v.$color-bronze-light;
+
+  &:hover {
+    color: v.$color-bronze-light;
+  }
 }
 
-.overlay__index {
-  font-family: v.$font-body;
-  font-size: v.$font-size-xs;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  border: 1px solid currentColor;
-  padding: 3px 8px;
-  color: v.$color-verdigris-light;
-  align-self: center;
-}

@@ -7,7 +7,7 @@ export default function ProductsPage() {
   return (
     <>
       <Helmet>
-        <title>Produkter – Hyltans Metall</title>
+        <title>Produkter. Hyltans Metall</title>
       </Helmet>
 
       {/* Header block */}
@@ -19,8 +19,9 @@ export default function ProductsPage() {
               <h1 className={styles['products-page__h1']}>Produkter</h1>
             </div>
             <p className={styles['products-page__intro']}>
-              Alla våra produkter gjuts för hand i brons i vår verkstad i Gnosjö.
-              Välj en kategori nedan eller kontakta oss för att beställa.
+              Alla våra produkter sandgjuts för hand i brons och mässing i vår
+              verkstad i Gnosjö. Välj en kategori nedan eller kontakta oss för
+              att beställa.
             </p>
           </div>
         </div>
@@ -31,7 +32,7 @@ export default function ProductsPage() {
         <div className="container">
           <div className={styles['products-page__grid']}>
             {productCategories.map((product, i) => (
-              <ProductCard key={product.id} product={product} number={i + 1} />
+              <ProductCard key={product.id} product={product} priority={i === 0} />
             ))}
           </div>
         </div>

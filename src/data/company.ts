@@ -8,5 +8,5 @@ export const company = {
   phone: '',
   website: 'hyltansmetall.se',
   description:
-    'Hyltans Metall AB är ett familjeföretag i Gnosjö med anor sedan 1926. I tre generationer har vi bevarat hantverket sandgjutning i brons – en tidlös metod där varje detalj görs för hand.',
+    'Hyltans Metall tillverkar sandgjutna produkter i brons och mässing. Tillverkningen sker med samma metoder som vid företagets start 1926. Ett äkta hantverk som har ärvts från far till son i tre generationer.',
 } as const;

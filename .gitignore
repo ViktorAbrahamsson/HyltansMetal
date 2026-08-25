@@ -6,3 +6,7 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Raw image dump — unsorted originals, never committed.
+# Sorted/resized images under src/assets/images/<category>/ ARE committed.
+src/assets/images/inbox/

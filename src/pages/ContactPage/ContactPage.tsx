@@ -1,12 +1,41 @@
+import { useState, type FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { company } from '@/data/company';
 import styles from './ContactPage.module.scss';
 
 export default function ContactPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  /**
+   * There is no backend, so the form hands the message to the visitor's own
+   * email client with everything already filled in and addressed to us.
+   */
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const subject = name
+      ? `Meddelande från ${name}`
+      : 'Meddelande från hyltansmetall.se';
+
+    const body = [
+      `Namn: ${name}`,
+      `E-post: ${email}`,
+      '',
+      message,
+    ].join('\r\n');
+
+    window.location.href =
+      `mailto:${company.email}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+  }
+
   return (
     <>
       <Helmet>
-        <title>Kontakt – Hyltans Metall</title>
+        <title>Kontakta oss. Hyltans Metall</title>
       </Helmet>
 
       <section className={`block contact-block ${styles['contact-page__section']}`}>
@@ -16,7 +45,7 @@ export default function ContactPage() {
             {/* Info column */}
             <div className={styles['contact-page__info']}>
               <p className="label">Kom i kontakt</p>
-              <h1 className={styles['contact-page__h1']}>Kontakt</h1>
+              <h1 className={styles['contact-page__h1']}>Kontakta oss</h1>
               <a
                 href={`mailto:${company.email}`}
                 className={styles['contact-page__email-link']}
@@ -38,7 +67,7 @@ export default function ContactPage() {
 
             {/* Form column */}
             <div className={styles['contact-page__form-card']}>
-              <form className={styles['contact-page__form']} noValidate>
+              <form className={styles['contact-page__form']} onSubmit={handleSubmit}>
                 <h2 className={styles['contact-page__form-heading']}>Skicka ett meddelande</h2>
 
                 <div className={styles['contact-page__form-group']}>
@@ -51,6 +80,9 @@ export default function ContactPage() {
                     name="name"
                     className={styles['contact-page__form-input']}
                     autoComplete="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
 
@@ -64,6 +96,9 @@ export default function ContactPage() {
                     name="email"
                     className={styles['contact-page__form-input']}
                     autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
 
@@ -76,6 +111,9 @@ export default function ContactPage() {
                     name="message"
                     rows={5}
                     className={styles['contact-page__form-textarea']}
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   />
                 </div>
 
@@ -85,6 +123,11 @@ export default function ContactPage() {
                 >
                   Skicka meddelande
                 </button>
+
+                <p className={styles['contact-page__form-note']}>
+                  Knappen öppnar ditt e-postprogram med meddelandet ifyllt och
+                  adresserat till {company.email}.
+                </p>
               </form>
             </div>
 
