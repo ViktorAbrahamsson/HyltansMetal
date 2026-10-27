@@ -1,0 +1,156 @@
+// ─── Intro block ─────────────────────────────────────────────────────────────
+.product-category__crumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: v.$color-ink-soft;
+  margin-bottom: v.$space-3;
+}
+
+.product-category__crumb-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid v.$color-line;
+  transition: color v.$transition-fast, border-color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-bronze;
+    border-color: v.$color-bronze;
+  }
+
+  @include m.focus-ring(#B07A2E);
+}
+
+.product-category__h1 {
+  margin-bottom: v.$space-4;
+}
+
+// ─── Items ───────────────────────────────────────────────────────────────────
+.product-category__items-block {}
+
+.product-category__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-6;
+
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include m.respond-to(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.product-category__item {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.product-category__item-media {}
+
+// Stands in for an unphotographed item. Carries the same aspect ratio as
+// Figure's landscape frame so swapping a photo in later moves nothing.
+.product-category__item-placeholder {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-1;
+  background-color: v.$color-sand-deep;
+  border: 1px dashed v.$color-line;
+
+  @include m.grain;
+}
+
+.product-category__item-slot {
+  font-family: v.$font-display;
+  font-size: v.$font-size-xl;
+  line-height: 1;
+  color: v.$color-bronze-light;
+}
+
+.product-category__item-pending {
+  font-family: v.$font-body;
+  font-size: v.$font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: v.$color-ink-soft;
+}
+
+.product-category__item-title {
+  font-family: v.$font-display;
+  font-size: v.$font-size-lg;
+  color: v.$color-ink;
+}
+
+// ─── Enquiry block ───────────────────────────────────────────────────────────
+.product-category__cta-block {}
+
+.product-category__cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: v.$space-4;
+  text-align: left;
+
+  @include m.respond-to(md) {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.product-category__cta-h2 {
+  font-size: v.$font-size-display-2;
+  color: v.$color-cream;
+}
+
+.product-category__cta-text {
+  max-width: 50ch;
+  color: v.$color-cream-soft;
+  line-height: 1.65;
+}
+
+// ─── Sibling categories ──────────────────────────────────────────────────────
+.product-category__more-block {}
+
+.product-category__more-h2 {
+  font-size: v.$font-size-display-3;
+  margin-bottom: v.$space-4;
+}
+
+.product-category__more-list {
+  list-style: none;
+}
+
+.product-category__more-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-4;
+  padding-block: v.$space-3;
+  border-top: 1px solid v.$color-line;
+  font-family: v.$font-display;
+  font-size: v.$font-size-xl;
+  color: v.$color-ink;
+  text-decoration: none;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-bronze;
+  }
+
+  @include m.focus-ring(#B07A2E);
+
+  li:last-child & {
+    border-bottom: 1px solid v.$color-line;
+  }
+}

@@ -6,7 +6,23 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  cursor: default;
+  transition: border-color v.$transition-fast;
+
+  &:hover {
+    border-color: v.$color-bronze;
+  }
+}
+
+// The link fills the card, so it — not .card — is the flex column that lays
+// the photo and body out.
+.card__link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: inherit;
+  text-decoration: none;
+
+  @include m.focus-ring(#B07A2E);
 }
 
 // ─── Media ───────────────────────────────────────────────────────────────────

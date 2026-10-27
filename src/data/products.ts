@@ -1,41 +1,83 @@
 import { images, type ResponsiveImage } from '@/assets/images/manifest';
 
+/**
+ * One physical product within a category.
+ *
+ * TODO(copy): no item has been named or photographed yet. Until `title` and
+ * `image` are filled in, the category page renders the entry as an empty slot.
+ * Adding or removing entries here changes the grid — there is no count stored
+ * anywhere else.
+ */
+export interface ProductItem {
+  id: string;
+  /** Undefined until the item has been named. */
+  title?: string;
+  /** Undefined until the item has been photographed. */
+  image?: ResponsiveImage;
+  imageAlt?: string;
+}
+
 export interface ProductCategory {
   id: string;
+  /** URL segment under /produkter. Keep ASCII — no å/ä/ö. */
+  slug: string;
   title: string;
+  /** Singular form, for labelling an item that has no name of its own yet. */
+  itemNoun: string;
   description: string;
   /** Undefined until the category has been photographed. */
   image?: ResponsiveImage;
   imageAlt?: string;
+  items: ProductItem[];
 }
 
 export const productCategories: ProductCategory[] = [
   {
     id: 'angels',
+    slug: 'anglar',
     title: 'Änglar',
+    itemNoun: 'Ängel',
     description: 'Handgjutna änglar i brons, i olika storlekar och utföranden.',
     image: images['products/anglar'],
     imageAlt: 'Två bronsänglar som ljusstakar med tända ljus.',
+    // Only one kind of ängel.
+    items: [{ id: 'angel-1' }],
   },
   {
     id: 'candlesticks',
+    slug: 'malmljusstakar',
     title: 'Malmljusstakar',
+    itemNoun: 'Malmljusstake',
     description: 'Klassiska malmljusstakar, svarvade och polerade för hand.',
     image: images['products/ljusstakar'],
     imageAlt: 'Nypolerade malmljusstakar uppradade på arbetsbänken i verkstaden.',
+    // Seeded with three so the grid is visible; the real count is not settled,
+    // so add or remove entries here rather than changing any component.
+    items: [
+      { id: 'candlestick-1' },
+      { id: 'candlestick-2' },
+      { id: 'candlestick-3' },
+    ],
   },
   {
     id: 'gnomes',
+    slug: 'tomtar',
     title: 'Tomtar',
+    itemNoun: 'Tomte',
     description: 'Traditionella svenska tomtar gjutna i brons.',
     image: images['products/tomtar'],
     imageAlt: 'Två bronstomtar med spetsiga luvor uppställda på en mörk trähylla.',
-  },
-  {
-    id: 'other',
-    title: 'Övriga produkter',
-    description: 'Ett brett sortiment av sandgjutna föremål i brons och mässing.',
-    image: images['products/ovrigt'],
-    imageAlt: 'Nygjutna detaljer kvar i sandformen efter gjutning.',
+    // Five kinds of tomte.
+    items: [
+      { id: 'gnome-1' },
+      { id: 'gnome-2' },
+      { id: 'gnome-3' },
+      { id: 'gnome-4' },
+      { id: 'gnome-5' },
+    ],
   },
 ];
+
+export function getCategoryBySlug(slug: string | undefined): ProductCategory | undefined {
+  return productCategories.find((category) => category.slug === slug);
+}
