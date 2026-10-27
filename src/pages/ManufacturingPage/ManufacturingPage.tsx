@@ -63,10 +63,9 @@ export default function ManufacturingPage() {
 
       {/* Intro block */}
       <section className={`block manufacturing-block ${styles['mfg-intro']}`}>
-        <div className="container container-sm">
-          <p className="label">Processen</p>
+        <div className="container container-sm page-intro">
           <h1 className={styles['mfg-intro__h1']}>Tillverkningen</h1>
-          <p className={styles['mfg-intro__lead']}>
+          <p className="page-intro__lead">
             Varje form används bara en gång. Sanden packas för hand runt modellen,
             metallen smälts i en kokseldad gjutugn och formen slås sönder när godset
             svalnat. Allt med samma metoder som vid företagets start 1926.

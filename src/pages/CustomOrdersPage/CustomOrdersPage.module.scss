@@ -1,0 +1,105 @@
+// ─── Intro block ─────────────────────────────────────────────────────────────
+.custom-orders__intro {}
+
+.custom-orders__h1 {
+  margin-bottom: v.$space-4;
+}
+
+// ─── Shared two-column layout ────────────────────────────────────────────────
+// Text and photo sit stacked on small screens and side by side once there is
+// room. `--reverse` puts the photo first on wide screens so consecutive
+// sections alternate instead of forming one hard edge down the page.
+.custom-orders__split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-6;
+  align-items: center;
+
+  @include m.respond-to(lg) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: v.$space-10;
+  }
+}
+
+.custom-orders__split-text {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.custom-orders__split-media {
+  @include m.respond-to(lg) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.custom-orders__split--reverse {
+  .custom-orders__split-media {
+    @include m.respond-to(lg) {
+      grid-column: 1;
+    }
+  }
+
+  .custom-orders__split-text {
+    @include m.respond-to(lg) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+}
+
+.custom-orders__h2 {
+  font-size: v.$font-size-display-3;
+  margin-bottom: v.$space-2;
+}
+
+.custom-orders__body {
+  max-width: 60ch;
+  font-size: v.$font-size-lg;
+  color: v.$color-ink-soft;
+  line-height: 1.65;
+}
+
+// ─── What we cast ────────────────────────────────────────────────────────────
+.custom-orders__list-block {}
+
+.custom-orders__list {
+  list-style: none;
+}
+
+.custom-orders__list-item {
+  padding-block: v.$space-3;
+  border-top: 1px solid v.$color-line;
+  font-family: v.$font-display;
+  font-size: v.$font-size-xl;
+  color: v.$color-ink;
+
+  &:last-child {
+    border-bottom: 1px solid v.$color-line;
+  }
+}
+
+// ─── Model block ─────────────────────────────────────────────────────────────
+.custom-orders__model-block {}
+
+// ─── CTA block ───────────────────────────────────────────────────────────────
+.custom-orders__cta-block {}
+
+.custom-orders__cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: v.$space-5;
+  text-align: left;
+
+  @include m.respond-to(md) {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.custom-orders__cta-h2 {
+  font-size: v.$font-size-display-2;
+  color: v.$color-cream;
+}

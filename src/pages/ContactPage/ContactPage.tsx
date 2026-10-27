@@ -40,12 +40,14 @@ export default function ContactPage() {
 
       <section className={`block contact-block ${styles['contact-page__section']}`}>
         <div className="container">
+          <div className={`page-intro ${styles['contact-page__intro']}`}>
+            <h1 className={styles['contact-page__h1']}>Kontakta oss</h1>
+          </div>
+
           <div className={styles['contact-page__layout']}>
 
             {/* Info column */}
             <div className={styles['contact-page__info']}>
-              <p className="label">Kom i kontakt</p>
-              <h1 className={styles['contact-page__h1']}>Kontakta oss</h1>
               <a
                 href={`mailto:${company.email}`}
                 className={styles['contact-page__email-link']}

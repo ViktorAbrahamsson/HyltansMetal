@@ -10,16 +10,9 @@
 }
 
 .about-page__h1 {
-  margin-top: v.$space-2;
   margin-bottom: v.$space-4;
 }
 
-.about-page__lead {
-  font-size: v.$font-size-lead;
-  max-width: 60ch;
-  color: v.$color-ink-soft;
-  line-height: 1.65;
-}
 
 .about-page__ghost {
   position: absolute;

@@ -16,10 +16,9 @@ export default function AboutPage() {
       {/* Intro block */}
       <section className={`block about-page-block ${styles['about-page__intro']}`}>
         <div className="container">
-          <div className={styles['about-page__intro-inner']}>
-            <p className="label">Sedan 1926</p>
+          <div className={`page-intro ${styles['about-page__intro-inner']}`}>
             <h1 className={styles['about-page__h1']}>Om företaget</h1>
-            <p className={styles['about-page__lead']}>
+            <p className="page-intro__lead">
               Hyltans Metall tillverkar sandgjutna produkter i brons och mässing.
               Tillverkningen sker med samma metoder som vid företagets start 1926.
               Ett äkta hantverk som har ärvts från far till son i tre generationer.

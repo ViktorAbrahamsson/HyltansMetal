@@ -12,18 +12,13 @@ export default function ProductsPage() {
 
       {/* Header block */}
       <section className="block products-page-block">
-        <div className="container">
-          <div className={styles['products-page__header']}>
-            <div className={styles['products-page__meta']}>
-              <p className="label">Sortiment</p>
-              <h1 className={styles['products-page__h1']}>Produkter</h1>
-            </div>
-            <p className={styles['products-page__intro']}>
-              Alla våra produkter sandgjuts för hand i brons och mässing i vår
-              verkstad i Gnosjö. Välj en kategori nedan eller kontakta oss för
-              att beställa.
-            </p>
-          </div>
+        <div className="container container-sm page-intro">
+          <h1 className={styles['products-page__h1']}>Produkter</h1>
+          <p className="page-intro__lead">
+            Alla våra produkter sandgjuts för hand i brons och mässing i vår
+            verkstad i Gnosjö. Välj en kategori nedan eller kontakta oss för
+            att beställa.
+          </p>
         </div>
       </section>
 

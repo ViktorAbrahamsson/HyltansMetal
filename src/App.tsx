@@ -6,6 +6,7 @@ import HomePage from '@/pages/HomePage/HomePage';
 import AboutPage from '@/pages/AboutPage/AboutPage';
 import ManufacturingPage from '@/pages/ManufacturingPage/ManufacturingPage';
 import ProductsPage from '@/pages/ProductsPage/ProductsPage';
+import CustomOrdersPage from '@/pages/CustomOrdersPage/CustomOrdersPage';
 import ContactPage from '@/pages/ContactPage/ContactPage';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/om-oss" element={<AboutPage />} />
           <Route path="/tillverkning" element={<ManufacturingPage />} />
           <Route path="/produkter" element={<ProductsPage />} />
+          <Route path="/specialtillverkning" element={<CustomOrdersPage />} />
           <Route path="/kontakt" element={<ContactPage />} />
         </Routes>
       </main>

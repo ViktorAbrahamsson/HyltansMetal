@@ -16,10 +16,13 @@
 // ─── Info column ─────────────────────────────────────────────────────────────
 .contact-page__info {}
 
-.contact-page__h1 {
-  margin-top: v.$space-2;
-  margin-bottom: v.$space-5;
+// Lifted out of the info column so the heading sits centred above both
+// columns, matching the other content pages.
+.contact-page__intro {
+  margin-bottom: v.$space-10;
 }
+
+.contact-page__h1 {}
 
 .contact-page__email-link {
   display: inline-block;

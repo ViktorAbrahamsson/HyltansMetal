@@ -257,6 +257,21 @@ a {
   }
 }
 
+// ─── Page intro ──────────────────────────────────────────────────────────────
+// The header every content page opens with: eyebrow, h1 and lead stacked and
+// centred. Shared rather than per-page so the pages line up with each other.
+.page-intro {
+  text-align: center;
+}
+
+.page-intro__lead {
+  max-width: 60ch;
+  margin-inline: auto;
+  font-size: v.$font-size-lead;
+  color: v.$color-ink-soft;
+  line-height: 1.65;
+}
+
 // ─── Main layout ─────────────────────────────────────────────────────────────
 main {
   padding-top: v.$header-height;
