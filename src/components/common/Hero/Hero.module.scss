@@ -164,6 +164,16 @@
   }
 }
 
+// The label is vertical text about 1em wide while the rule under it is 1px, so
+// the two need their own centring context. The cue itself stays pinned to the
+// container's left edge.
+.hero__scroll-cue-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: v.$space-1;
+}
+
 .hero__scroll-cue-label {
   font-family: v.$font-body;
   font-size: v.$font-size-xs;
@@ -175,12 +185,26 @@
   transform: rotate(180deg);
 }
 
+// Line and arrowhead pulse as one element so they cannot drift out of step.
+.hero__scroll-cue-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: v.$color-bronze-light;
+  animation: hero-pulse-line 2s ease-in-out infinite;
+}
+
 .hero__scroll-cue-line {
   display: block;
   width: 1px;
   height: 48px;
-  background: v.$color-bronze-light;
-  animation: hero-pulse-line 2s ease-in-out infinite;
+  background: currentColor;
+}
+
+.hero__scroll-cue-arrow {
+  display: block;
+  // Overlap the join so the stroke meets the rule with no hairline gap.
+  margin-top: -1px;
 }
 
 @keyframes hero-pulse-line {
@@ -192,7 +216,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero__glow,
   .hero__ghost,
-  .hero__scroll-cue-line {
+  .hero__scroll-cue-mark {
     animation: none;
   }
 

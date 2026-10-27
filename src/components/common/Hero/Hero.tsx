@@ -34,8 +34,28 @@ export default function Hero() {
 
       {/* Scroll cue */}
       <div className={styles['hero__scroll-cue']} aria-hidden="true">
-        <span className={styles['hero__scroll-cue-label']}>Scrolla</span>
-        <span className={styles['hero__scroll-cue-line']} />
+        <span className={styles['hero__scroll-cue-stack']}>
+          <span className={styles['hero__scroll-cue-label']}>Scrolla</span>
+          <span className={styles['hero__scroll-cue-mark']}>
+            <span className={styles['hero__scroll-cue-line']} />
+            <svg
+              className={styles['hero__scroll-cue-arrow']}
+              viewBox="0 0 12 8"
+              width="12"
+              height="8"
+              focusable="false"
+            >
+              <path
+                d="M1 1.5L6 6.5l5-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </span>
       </div>
     </section>
   );
