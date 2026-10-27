@@ -184,6 +184,13 @@
   }
 
   @include m.focus-ring(#D9A24B);
+
+  // These rows span the panel's full width, so the mixin's outset ring spilled
+  // over the panel border. Inset, it frames the row the way the ring frames a
+  // .btn.
+  &:focus-visible {
+    outline-offset: -4px;
+  }
 }
 
 .nav__submenu-link--active {

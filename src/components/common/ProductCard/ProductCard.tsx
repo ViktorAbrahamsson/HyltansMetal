@@ -31,10 +31,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         )}
         <div className={styles['card__body']}>
           <h3 className={styles.card__title}>{product.title}</h3>
-          <div className={styles.card__bottom}>
-            <p className={styles.card__desc}>{product.description}</p>
-            <span className={styles.card__rule} aria-hidden="true" />
-          </div>
+          <p className={styles.card__desc}>{product.description}</p>
         </div>
       </Link>
     </article>

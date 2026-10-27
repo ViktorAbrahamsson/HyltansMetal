@@ -23,6 +23,13 @@
   text-decoration: none;
 
   @include m.focus-ring(#B07A2E);
+
+  // The link fills the card, and .card clips with overflow:hidden, so the
+  // mixin's outset ring was drawn outside the card and never shown — the card
+  // looked unfocusable even though it was in the tab order. Inset it instead.
+  &:focus-visible {
+    outline-offset: -3px;
+  }
 }
 
 // ─── Media ───────────────────────────────────────────────────────────────────
@@ -54,23 +61,12 @@
   margin-bottom: v.$space-3;
 }
 
-// ─── Bottom ──────────────────────────────────────────────────────────────────
-.card__bottom {
-  display: flex;
-  flex-direction: column;
-  gap: v.$space-2;
-}
-
+// ─── Description ─────────────────────────────────────────────────────────────
+// .card__body is space-between and .card__title takes the free space, so this
+// sits at the bottom without a wrapper of its own.
 .card__desc {
   font-size: v.$font-size-sm;
   color: v.$color-ink-soft;
   line-height: 1.6;
   max-width: none;
-}
-
-.card__rule {
-  display: block;
-  width: 32px;
-  height: 1px;
-  background-color: v.$color-bronze;
 }
