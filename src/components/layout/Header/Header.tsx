@@ -1,21 +1,83 @@
 import { useState, useEffect, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { productCategories } from '@/data/products';
 import styles from './Header.module.scss';
 
-const navLinks = [
-  { to: '/', label: 'Start' },
-  { to: '/om-oss', label: 'Om företaget' },
-  { to: '/tillverkning', label: 'Tillverkningen' },
-  { to: '/produkter', label: 'Produkter' },
-  { to: '/specialtillverkning', label: 'Specialtillverkning' },
-  { to: '/kontakt', label: 'Kontakta oss' },
+interface NavChild {
+  to: string;
+  label: string;
+}
+
+interface NavEntry {
+  to: string;
+  label: string;
+  children?: NavChild[];
+}
+
+// No Start entry: the logo is already a link to the home page, and it stays
+// above the mobile overlay, so home is reachable from every state.
+// Produkter's submenu is derived from the category data, so adding a category
+// adds it to the nav with no change here.
+const navLinks: NavEntry[] = [
+  {
+    to: '/produkter',
+    label: 'Produkter',
+    children: productCategories.map((category) => ({
+      to: `/produkter/${category.slug}`,
+      label: category.title,
+    })),
+  },
+  {
+    to: '/specialtillverkning',
+    label: 'Specialtillverkning',
+    children: [{ to: '/tillverkning', label: 'Gjutprocessen' }],
+  },
+  {
+    to: '/om-oss',
+    label: 'Om företaget',
+    children: [{ to: '/kontakt', label: 'Kontakta oss' }],
+  },
 ];
+
+/**
+ * Whether a top-level item should read as current.
+ *
+ * NavLink's own matching only covers nested paths, which works for
+ * /produkter/anglar but not for a child on an unrelated path like /kontakt
+ * under Om företaget — without this the nav would show nothing as current on
+ * those pages.
+ */
+function isSectionActive(entry: NavEntry, pathname: string): boolean {
+  if (pathname === entry.to || pathname.startsWith(`${entry.to}/`)) return true;
+  return (entry.children ?? []).some((child) => pathname === child.to);
+}
+
+function Chevron() {
+  return (
+    <svg
+      className={styles['nav__chevron']}
+      viewBox="0 0 10 6"
+      width="10"
+      height="6"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M1 1l4 4 4-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -35,13 +97,16 @@ export default function Header() {
 
   const toggleMenu = useCallback(() => setMenuOpen(o => !o), []);
 
-  const isTransparent = isHome && !scrolled && !menuOpen;
+  // At rest the header is the same solid colour as the footer. It only turns
+  // translucent once the page has scrolled, so content passes under glass
+  // rather than the header starting see-through over the hero.
+  const isTranslucent = scrolled && !menuOpen;
 
   return (
     <header
       className={[
         styles.header,
-        isTransparent ? styles['header--transparent'] : styles['header--solid'],
+        isTranslucent ? styles['header--translucent'] : styles['header--opaque'],
         menuOpen ? styles['header--menu-open'] : '',
       ].join(' ')}
     >
@@ -53,17 +118,48 @@ export default function Header() {
 
         <nav className={styles.nav} aria-label="Huvudnavigation">
           <ul className={styles.nav__list}>
-            {navLinks.map(({ to, label }) => (
-              <li key={to} className={styles.nav__item}>
+            {navLinks.map(({ to, label, children }) => (
+              <li
+                key={to}
+                className={[
+                  styles.nav__item,
+                  children ? styles['nav__item--has-menu'] : '',
+                ].join(' ')}
+              >
                 <NavLink
                   to={to}
-                  end={to === '/'}
-                  className={({ isActive }) =>
-                    [styles.nav__link, isActive ? styles['nav__link--active'] : ''].join(' ')
-                  }
+                  className={[
+                    styles.nav__link,
+                    isSectionActive({ to, label, children }, location.pathname)
+                      ? styles['nav__link--active']
+                      : '',
+                  ].join(' ')}
                 >
                   {label}
+                  {children && <Chevron />}
                 </NavLink>
+
+                {children && (
+                  // Opens on hover and on focus-within, so tabbing to Produkter
+                  // reveals it without needing a separate toggle button.
+                  <ul className={styles['nav__submenu']}>
+                    {children.map((child) => (
+                      <li key={child.to}>
+                        <NavLink
+                          to={child.to}
+                          className={({ isActive }) =>
+                            [
+                              styles['nav__submenu-link'],
+                              isActive ? styles['nav__submenu-link--active'] : '',
+                            ].join(' ')
+                          }
+                        >
+                          {child.label}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
@@ -85,7 +181,7 @@ export default function Header() {
       <div className={[styles.overlay, menuOpen ? styles['overlay--open'] : ''].join(' ')} aria-hidden={!menuOpen}>
         <nav aria-label="Mobilnavigation">
           <ul className={styles.overlay__list}>
-            {navLinks.map(({ to, label }, i) => (
+            {navLinks.map(({ to, label, children }, i) => (
               <li
                 key={to}
                 className={styles.overlay__item}
@@ -93,14 +189,39 @@ export default function Header() {
               >
                 <NavLink
                   to={to}
-                  end={to === '/'}
-                  className={({ isActive }) =>
-                    [styles.overlay__link, isActive ? styles['overlay__link--active'] : ''].join(' ')
-                  }
+                  className={[
+                    styles.overlay__link,
+                    isSectionActive({ to, label, children }, location.pathname)
+                      ? styles['overlay__link--active']
+                      : '',
+                  ].join(' ')}
                   tabIndex={menuOpen ? 0 : -1}
                 >
                   {label}
                 </NavLink>
+
+                {children && (
+                  // The list is short, so the categories stay expanded rather
+                  // than hiding behind another tap.
+                  <ul className={styles['overlay__sublist']}>
+                    {children.map((child) => (
+                      <li key={child.to}>
+                        <NavLink
+                          to={child.to}
+                          className={({ isActive }) =>
+                            [
+                              styles['overlay__sublink'],
+                              isActive ? styles['overlay__sublink--active'] : '',
+                            ].join(' ')
+                          }
+                          tabIndex={menuOpen ? 0 : -1}
+                        >
+                          {child.label}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

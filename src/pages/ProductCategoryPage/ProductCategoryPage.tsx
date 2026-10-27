@@ -23,20 +23,32 @@ export default function ProductCategoryPage() {
         <meta name="description" content={category.description} />
       </Helmet>
 
-      {/* Intro block */}
-      <section className="block product-category-block">
-        <div className="container container-sm page-intro">
-          <nav
-            className={styles['product-category__crumbs']}
-            aria-label="Brödsmulor"
-          >
+      {/* Breadcrumbs. First thing in <main>, which clears the fixed header, so
+          this sits directly beneath it. */}
+      <nav
+        className={styles['product-category__crumbs']}
+        aria-label="Brödsmulor"
+      >
+        <ol className={`container ${styles['product-category__crumb-list']}`}>
+          <li className={styles['product-category__crumb']}>
+            <Link to="/" className={styles['product-category__crumb-link']}>
+              Start
+            </Link>
+          </li>
+          <li className={styles['product-category__crumb']}>
             <Link to="/produkter" className={styles['product-category__crumb-link']}>
               Produkter
             </Link>
-            <span aria-hidden="true">·</span>
-            <span>{category.title}</span>
-          </nav>
+          </li>
+          <li className={styles['product-category__crumb']} aria-current="page">
+            {category.title}
+          </li>
+        </ol>
+      </nav>
 
+      {/* Intro block */}
+      <section className={`block product-category-block ${styles['product-category__intro-block']}`}>
+        <div className="container container-sm page-intro">
           <h1 className={styles['product-category__h1']}>{category.title}</h1>
           <p className="page-intro__lead">{category.description}</p>
         </div>

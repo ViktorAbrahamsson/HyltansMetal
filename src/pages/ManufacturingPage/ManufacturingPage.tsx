@@ -58,13 +58,13 @@ export default function ManufacturingPage() {
   return (
     <>
       <Helmet>
-        <title>Tillverkningen. Hyltans Metall</title>
+        <title>Gjutprocessen. Hyltans Metall</title>
       </Helmet>
 
       {/* Intro block */}
       <section className={`block manufacturing-block ${styles['mfg-intro']}`}>
         <div className="container container-sm page-intro">
-          <h1 className={styles['mfg-intro__h1']}>Tillverkningen</h1>
+          <h1 className={styles['mfg-intro__h1']}>Gjutprocessen</h1>
           <p className="page-intro__lead">
             Varje form används bara en gång. Sanden packas för hand runt modellen,
             metallen smälts i en kokseldad gjutugn och formen slås sönder när godset

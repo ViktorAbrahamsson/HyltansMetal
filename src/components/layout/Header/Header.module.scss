@@ -8,9 +8,10 @@
   transition: background v.$transition-base, border-color v.$transition-base;
 }
 
-.header--transparent {
-  background: transparent;
-  border-bottom: 1px solid transparent;
+// At rest: the same solid colour as the footer.
+.header--opaque {
+  background: v.$color-coal;
+  border-bottom: 1px solid v.$color-line-dark;
 
   .logo__name,
   .logo__tagline,
@@ -24,7 +25,9 @@
   }
 }
 
-.header--solid {
+// Once scrolled: the same colour at 82% with a blur, so content shows through
+// as it passes underneath while the nav stays legible over light pages too.
+.header--translucent {
   background: rgba(22, 18, 16, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -99,17 +102,94 @@
   display: none;
 
   @include m.respond-to(lg) {
-    display: block;
+    // Full height so a submenu hung off an item drops clear of the header
+    // instead of starting halfway up it.
+    display: flex;
+    align-self: stretch;
   }
 }
 
 .nav__list {
   list-style: none;
   display: flex;
+  align-items: stretch;
   gap: v.$space-4;
 }
 
-.nav__item {}
+.nav__item {
+  display: flex;
+  align-items: center;
+}
+
+.nav__item--has-menu {
+  position: relative;
+}
+
+.nav__chevron {
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: transform v.$transition-fast;
+
+  .nav__item--has-menu:hover &,
+  .nav__item--has-menu:focus-within & {
+    transform: rotate(180deg);
+  }
+}
+
+// Hover keeps it open for pointers; focus-within keeps it open for keyboards,
+// so tabbing to Produkter reveals the categories with no toggle button.
+.nav__submenu {
+  position: absolute;
+  top: 100%;
+  // Centred on the menu item rather than hung off its left edge. The X half of
+  // the translate is the centring and must survive the open/close transition,
+  // so both states carry it.
+  left: 50%;
+  z-index: v.$z-nav;
+  min-width: 220px;
+  list-style: none;
+  padding-block: v.$space-2;
+  background-color: v.$color-coal;
+  border: 1px solid v.$color-line-dark;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -4px);
+  transition: opacity v.$transition-fast, transform v.$transition-fast,
+    visibility 0s v.$transition-fast;
+
+  .nav__item--has-menu:hover &,
+  .nav__item--has-menu:focus-within & {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    transition: opacity v.$transition-fast, transform v.$transition-fast;
+  }
+}
+
+.nav__submenu-link {
+  display: block;
+  padding: v.$space-2 v.$space-4;
+  text-align: center;
+  font-family: v.$font-body;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: v.$color-cream-soft;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-bronze-light;
+  }
+
+  @include m.focus-ring(#D9A24B);
+}
+
+.nav__submenu-link--active {
+  color: v.$color-bronze-light;
+  font-weight: 600;
+}
 
 .nav__link {
   font-family: v.$font-body;
@@ -142,7 +222,7 @@
 }
 
 // Active page is marked in bronze rather than with an underline. Doubled-up
-// selector because `.header--solid .nav__link` and `.header--transparent
+// selector because `.header--opaque .nav__link` and `.header--translucent
 // .nav__link` both set `color` with two classes and would otherwise win.
 .nav__link.nav__link--active {
   color: v.$color-bronze-light;
@@ -203,8 +283,8 @@
     width: 14px;
   }
 
-  // Two classes, so this outranks the .header--solid / --transparent rules that
-  // also colour the bars.
+  // Two classes, so this outranks the .header--opaque / --translucent rules
+  // that also colour the bars.
   .header--menu-open & {
     background-color: v.$color-bronze-light;
 
@@ -282,5 +362,37 @@
   &:hover {
     color: v.$color-bronze-light;
   }
+}
+
+// Product categories under Produkter. Only three, so they stay open rather
+// than hiding behind another tap.
+.overlay__sublist {
+  list-style: none;
+  margin-top: v.$space-2;
+  padding-left: v.$space-4;
+  border-left: 1px solid v.$color-line-dark;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.overlay__sublink {
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  letter-spacing: 0.04em;
+  color: v.$color-cream-soft;
+  text-decoration: none;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-cream;
+  }
+
+  @include m.focus-ring(#D9A24B);
+}
+
+.overlay__sublink--active {
+  color: v.$color-bronze-light;
+  font-weight: 600;
 }
 

@@ -2,12 +2,14 @@ import { NavLink } from 'react-router-dom';
 import { company } from '@/data/company';
 import styles from './Footer.module.scss';
 
+// Kept flat and complete, unlike the header: the footer is the site's index,
+// so pages nested in a header dropdown still get a direct link here.
 const navLinks = [
   { to: '/', label: 'Start' },
-  { to: '/om-oss', label: 'Om företaget' },
-  { to: '/tillverkning', label: 'Tillverkningen' },
   { to: '/produkter', label: 'Produkter' },
   { to: '/specialtillverkning', label: 'Specialtillverkning' },
+  { to: '/tillverkning', label: 'Gjutprocessen' },
+  { to: '/om-oss', label: 'Om företaget' },
   { to: '/kontakt', label: 'Kontakta oss' },
 ];
 
